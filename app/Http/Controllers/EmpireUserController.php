@@ -21,7 +21,7 @@ class EmpireUserController extends Controller
             'code' => '0',
         ];
         if (!empty($vldKey)){
-           $user =  EmpireUser::query()->first(["vld_key"=>$vldKey]);
+           $user =  EmpireUser::query()->where(["vld_key"=>$vldKey])->first(["vld_key",'deadline']);
            if ($user){
                if (time() >= $user->vld_key){
                    $data["msg"] = "使用码已过期，请加v：clh_zgb ";
