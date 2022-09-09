@@ -35,4 +35,26 @@ class EmpireUserController extends Controller
         }
         return response()->json($data);
     }
+
+    public function addVldKey(string $vldKey = '',int $h = 0,int $i = 20,int $s = 60): \Illuminate\Http\JsonResponse
+    {
+        $time = time() + $h * 60 * 60 + $i * 60 + $s;
+        if (empty($vldKey)){
+            $vldKey = uniqid();
+        }
+        $user = [
+            'vld_Key' => $vldKey,
+            'deadline' => $time
+        ];
+        EmpireUser::query()->insert($user);
+        $data = [
+            'data' => [
+                'vldKey' => $user['vldKey'],
+                'deadline' => $time
+            ],
+            'msg' => '',
+            'code' => '1',
+        ];
+        return response()->json($data);
+    }
 }
