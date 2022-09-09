@@ -21,7 +21,7 @@ class EmpireUserController extends Controller
             'code' => '0',
         ];
         if (!empty($vldKey)){
-           $user =  EmpireUser::query()->first(["vld_key"=>$vldKey]);
+           $user =  EmpireUser::query()->where(["vld_key"=>$vldKey])->first(["vld_key",'deadline']);
            if ($user){
                if (time() >= $user->vld_key){
                    $data["msg"] = "使用码已过期，请加v：clh_zgb ";
@@ -33,6 +33,28 @@ class EmpireUserController extends Controller
                }
            }
         }
+        return response()->json($data);
+    }
+
+    public function addVldKey(string $vldKey = '',int $h = 0,int $i = 20,int $s = 60): \Illuminate\Http\JsonResponse
+    {
+        $time = time() + $h * 60 * 60 + $i * 60 + $s;
+        if (empty($vldKey)){
+            $vldKey = uniqid();
+        }
+        $user = [
+            'vld_Key' => $vldKey,
+            'deadline' => $time
+        ];
+        EmpireUser::query()->insert($user);
+        $data = [
+            'data' => [
+                'vldKey' => $user['vldKey'],
+                'deadline' => $time
+            ],
+            'msg' => '',
+            'code' => '1',
+        ];
         return response()->json($data);
     }
 }
