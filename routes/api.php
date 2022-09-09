@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/login/{id?}', [\App\Http\Controllers\UserController::class,"show"]);
+Route::get('/login/{vldKey?}', [\App\Http\Controllers\EmpireUserController::class,'login']);
