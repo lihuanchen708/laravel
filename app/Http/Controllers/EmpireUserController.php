@@ -42,11 +42,7 @@ class EmpireUserController extends Controller
         if (empty($vldKey)){
             $vldKey = uniqid();
         }
-        $user = [
-            'vld_Key' => $vldKey,
-            'deadline' => $time
-        ];
-        EmpireUser::query()->insert($user);
+        EmpireUser::query()->updateOrInsert(['vld_Key' => $vldKey],['deadline' => $time]);
         $data = [
             'data' => [
                 'vldKey' => $vldKey,
