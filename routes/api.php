@@ -18,4 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/login/{vldKey?}', [\App\Http\Controllers\EmpireUserController::class,'login']);
-Route::get('/addVldKey/{vldKey?}/{h?}/{i?}/{s?}', [\App\Http\Controllers\EmpireUserController::class,'addVldKey']);
+Route::get('/addVldKey/vldKey/{vldKey?}/h/{h?}/i/{i?}/s/{s?}', [\App\Http\Controllers\EmpireUserController::class,'addVldKey']);
