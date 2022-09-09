@@ -49,7 +49,7 @@ class EmpireUserController extends Controller
         EmpireUser::query()->insert($user);
         $data = [
             'data' => [
-                'vldKey' => $user['vldKey'],
+                'vldKey' => $vldKey,
                 'deadline' => $time
             ],
             'msg' => '',
