@@ -28,6 +28,7 @@ class EmpireUserController extends Controller
                }else{
                    $data["data"]["vldKey"] = $user->vld_key;
                    $data["data"]["deadline"] = $user->deadline;
+                   $data["data"]["time"] = time();
                    $data["msg"] = "使用码到期时间为：" . date('Y-m-d H-i-s',$user->deadline);
                    $data["code"] = 1;
                }
